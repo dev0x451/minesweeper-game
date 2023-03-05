@@ -1,0 +1,10 @@
+.app {
+}
+
+.cellstable {
+  max-width: 1000px;
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+}

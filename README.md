@@ -33,4 +33,8 @@ npm run build
 
 Запустите файл index.html из папки dist с помощью любого live http-сервера
 
+## Live Demo
+
+live-демо игры можно запустить [здесь](https://schapov.dev/minesweeper)
+
 Спасибо за внимание!

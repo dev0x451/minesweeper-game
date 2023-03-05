@@ -1,10 +1,73 @@
 .cell {
-  border: 1px solid black;
-  width: 50px;
-  height: 50px;
+  width: 16px;
+  height: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.cell_1 {
+  background-image: url(./assets/1_cell.png);
+  background-size: contain;
+}
+
+.cell_2 {
+  background-image: url(./assets/2_cell.png);
+  background-size: contain;
+}
+.cell_3 {
+  background-image: url(./assets/3_cell.png);
+  background-size: contain;
+}
+.cell_4 {
+  background-image: url(./assets/4_cell.png);
+  background-size: contain;
+}
+.cell_5 {
+  background-image: url(./assets/5_cell.png);
+  background-size: contain;
+}
+.cell_6 {
+  background-image: url(./assets/6_cell.png);
+  background-size: contain;
+}
+.cell_7 {
+  background-image: url(./assets/7_cell.png);
+  background-size: contain;
+}
+.cell_8 {
+  background-image: url(./assets/8_cell.png);
+  background-size: contain;
+}
+
+.cell_free {
+  background-image: url(./assets/cell_free.png);
+  background-size: contain;
+}
+
+.cell_bomb {
+  background-image: url(./assets/bomb.png);
+  background-size: contain;
+}
+
+.cell_explosion {
+  background-image: url(./assets/bomb_active.png);
+  background-size: contain;
+}
+
+.cell_covered {
+  background-image: url(./assets/blank_cell.png);
+  background-size: contain;
+}
+
+.cell_flag {
+  background-image: url(./assets/flag.png);
+  background-size: contain;
+}
+
+.cell_question {
+  background-image: url(./assets/question.png);
+  background-size: contain;
 }

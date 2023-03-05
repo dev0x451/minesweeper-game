@@ -1,10 +1,51 @@
 .app {
+  background-color: #c0c0c0;
+  border: 3px solid #ececec;
+  padding: 10px;
+}
+
+.app__header {
+  padding: 5px;
+  border: 3px solid #a2a2a2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app__button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
 }
 
 .cellstable {
+  margin-top: 10px;
   max-width: 1000px;
-  border: 1px solid red;
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(16, 1fr);
+  border: 3px solid #a2a2a2;
+}
+
+.app__smile_happy {
+  background-image: url(./assets/🙂.png);
+  background-size: contain;
+}
+
+.app__smile_ohh {
+  background-image: url(./assets/😯.png);
+  background-size: contain;
+}
+
+.app__smile_sad {
+  background-image: url(./assets/☹️.png);
+  background-size: contain;
+}
+
+.app__smile_cool {
+  background-image: url(./assets/😎.png);
+  background-size: contain;
 }

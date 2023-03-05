@@ -31,7 +31,7 @@ npm run dev
 npm run build
 ```
 
-Запустите файл index.html из папки dist с помощью любого live http-сервера
+- Запустите файл index.html из папки dist с помощью любого live http-сервера
 
 ## Live Demo
 

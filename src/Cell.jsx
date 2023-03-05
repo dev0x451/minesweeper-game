@@ -29,9 +29,10 @@ function Cell({ i, j, cell, handleClick }) {
       onContextMenu={handleContextMenu}
       className="cell"
     >
-      <div>{cell.state}</div>
-      <div>{cell.type}</div>
-      <div>Рядом мин {cell.minesaround}</div>
+      <div>{cell.state === '✅' ? cell.minesaround : cell.state === 'GAMEOVER' ? cell.type : cell.state}</div>
+      {/* <div>{cell.type}</div>
+      <div>{cell.minesaround}</div> */}
+      {/* 💣 1️⃣ 2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣0️⃣💥 🙂😎☹️ */}
       {/* <div>{cell[0]}</div>
       <div>{cell[1]}</div>
       <div>Рядом мин {cell[2]}</div> */}

@@ -1,0 +1,44 @@
+.digit {
+  width: 13px;
+  height: 23px;
+}
+.digit_0 {
+  background-image: url(./assets/0.png);
+  background-size: contain;
+}
+.digit_1 {
+  background-image: url(./assets/1.png);
+  background-size: contain;
+}
+.digit_2 {
+  background-image: url(./assets/2.png);
+  background-size: contain;
+}
+.digit_3 {
+  background-image: url(./assets/3.png);
+  background-size: contain;
+}
+.digit_4 {
+  background-image: url(./assets/4.png);
+  background-size: contain;
+}
+.digit_5 {
+  background-image: url(./assets/5.png);
+  background-size: contain;
+}
+.digit_6 {
+  background-image: url(./assets/6.png);
+  background-size: contain;
+}
+.digit_7 {
+  background-image: url(./assets/7.png);
+  background-size: contain;
+}
+.digit_8 {
+  background-image: url(./assets/8.png);
+  background-size: contain;
+}
+.digit_9 {
+  background-image: url(./assets/9.png);
+  background-size: contain;
+}

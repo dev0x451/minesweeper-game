@@ -1,7 +1,7 @@
 import './Cell.css'
 import { UNCOVERED, COVERED, FREE, BOMB, EXPLOSION, FLAG, QUESTION } from './App'
 
-function Cell({ i, j, appState, cell, handleClick, handleMousePress, handleMouseLeave }) {
+function Cell({ i, j, cell, handleClick, handleMousePress, handleMouseLeave }) {
   let renderedClassName = ''
   function onClick(e) {
     handleClick(i, j, 'leftClick')
@@ -113,12 +113,6 @@ function Cell({ i, j, appState, cell, handleClick, handleMousePress, handleMouse
 
   if (cell.type === FREE && cell.state === UNCOVERED && cell.minesaround !== 0) renderedClassName = minesaround
 
-  // 💣 7️⃣8️⃣9️⃣0️⃣💥❓🚩✅⏹️❎ 🙂😎
-
-  /* <div>{cell.state === '✅' ? cell.minesaround : cell.state === 'GAMEOVER' ? cell.type : cell.state}</div> */
-  /* <div>{cell.type}</div>
-      {cell.minesaround}</div> */
-
   return (
     <div
       onClick={onClick}
@@ -127,12 +121,8 @@ function Cell({ i, j, appState, cell, handleClick, handleMousePress, handleMouse
       onMouseLeave={onMouseLeave}
       onContextMenu={handleContextMenu}
       className={`cell ${renderedClassName}`}
-    >
-      <div>{}</div>
-      {/* <div>{renderedIcon}</div> */}
-    </div>
+    ></div>
   )
-  //   return <div className="cell">{state === 'blank' ? 'F' : 'M'}</div>
 }
 
 export default Cell

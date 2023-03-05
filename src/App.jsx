@@ -1,5 +1,6 @@
 import './App.css'
 import Cell from './Cell'
+import Digits from './Digits'
 import { useState, useEffect } from 'react'
 
 const TABLE_SIZE = 16
@@ -26,8 +27,6 @@ function App() {
         setTimer((t) => t + 1)
       }, 1000)
     }
-
-    // if (appState !== 'YOUWIN' || appState !== 'GAMEOVER') setAppSMILE(smile)
 
     return () => {
       clearInterval(interval)
@@ -56,10 +55,6 @@ function App() {
       }
     }
   }, [minesCount])
-
-  // useEffect(() => {
-  //   console.log(appState)
-  // }, [appState])
 
   function createDefaultTable() {
     const tmp = []
@@ -121,19 +116,7 @@ function App() {
   }
 
   function checkNeighbours(i, j) {
-    // если вышли за границы, return
-    // if (i - 1 < 0 || j - 1 < 0 || i + 1 >= TABLE_SIZE || j + 1 >= TABLE_SIZE) return
-
     let minesCount = 0
-
-    // if (cells[i + 1][j].type === BOMB) minesCount++
-    // if (cells[i][j + 1].type === BOMB) minesCount++
-    // if (cells[i + 1][j + 1].type === BOMB) minesCount++
-    // if (cells[i + 1][j - 1].type === BOMB) minesCount++
-    // if (cells[i - 1][j + 1].type === BOMB) minesCount++
-    // if (cells[i - 1][j].type === BOMB) minesCount++
-    // if (cells[i][j - 1].type === BOMB) minesCount++
-    // if (cells[i - 1][j - 1].type === BOMB) minesCount++
 
     if (i + 1 in cells && cells[i + 1][j].type === BOMB) minesCount++
     if (j + 1 in cells[i] && cells[i][j + 1].type === BOMB) minesCount++
@@ -181,18 +164,7 @@ function App() {
         setAppState('NEWGAME')
         openCell(i, j)
       } else openCell(i, j)
-
-      // if (cells[i][j].type === BOMB) {
-      //   setCell(i, j, { state: UNCOVERED, type: EXPLOSION, minesaround: cells[i][j].minesaround })
-      //   uncoverAllCells()
-      //   setAppState('GAMEOVER')
-      // } else openCell(i, j)
     }
-
-    // {
-    //   if (cells[i][j][0] == 'MINE') setCell(i, j, ['FREE', cells[i][j][1]])
-    //   else if (cells[i][j][0] == 'FREE') setCell(i, j, ['MINE', cells[i][j][1]])
-    // }
   }
 
   function openCell(i, j) {
@@ -215,8 +187,6 @@ function App() {
     // открываем клетку
     setCell(i, j, { state: UNCOVERED, type: cells[i][j].type, minesaround: cells[i][j].minesaround })
 
-    // и если нет мин рядом, то и все соседние через эту же функцию
-    // если и там нет мин, они откроют уже свои соседние
     if (cells[i][j].minesaround === 0) {
       openCell(i - 1, j - 1)
       openCell(i, j - 1)
@@ -232,9 +202,9 @@ function App() {
   return (
     <div className="app">
       <div className="app__header">
-        <div>{minesCount} mines</div>
+        <Digits digits={minesCount} />
         <button className={`app__button ${appSMILE}`} onClick={handleSmileClick}></button>
-        <div>{timer} сек</div>
+        <Digits digits={timer} />
       </div>
       <div className="cellstable">
         {cells.map((row, i) => {

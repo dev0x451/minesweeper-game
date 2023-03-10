@@ -1,22 +1,22 @@
 import './Cell.css'
 import { UNCOVERED, COVERED, FREE, BOMB, EXPLOSION, FLAG, QUESTION } from './App'
 
-function Cell({ i, j, cell, handleClick, handleMousePress, handleMouseLeave }) {
+function Cell({ i, j, cell, handleClick, handleSmileChange }) {
   let renderedClassName = ''
-  function onClick(e) {
+  function onClick() {
     handleClick(i, j, 'leftClick')
   }
 
-  const onMouseDown = (e) => {
-    handleMousePress('app__smile_ohh')
+  const onMouseDown = () => {
+    handleSmileChange('app__smile_ohh')
   }
 
-  const onMouseUp = (e) => {
-    handleMousePress('app__smile_happy')
+  const onMouseUp = () => {
+    handleSmileChange('app__smile_happy')
   }
 
-  const onMouseLeave = (e) => {
-    handleMouseLeave('app__smile_happy')
+  const onMouseLeave = () => {
+    handleSmileChange('app__smile_happy')
   }
 
   const handleContextMenu = (e) => {

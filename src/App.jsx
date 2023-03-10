@@ -17,11 +17,15 @@ function App() {
   const [cells, setCells] = useState([])
   const [timer, setTimer] = useState(0)
   const [appState, setAppState] = useState('IDLE')
-  const [appSMILE, setAppSMILE] = useState('app__smile_happy')
+  const [appSMILE, setAppSMILE] = useState('')
   const [minesCount, setMinesCount] = useState(MINES_TOTAL)
 
   useEffect(() => {
     let interval = null
+    if (appState === 'NEWGAME' || appState === 'IDLE') setAppSMILE('app__smile_happy')
+    else if (appState === 'YOUWIN') setAppSMILE('app__smile_cool')
+    else if (appState === 'GAMEOVER') setAppSMILE('app__smile_sad')
+
     if (appState === 'NEWGAME') {
       interval = setInterval(() => {
         setTimer((t) => t + 1)
@@ -51,7 +55,6 @@ function App() {
       if (count === MINES_TOTAL) {
         uncoverAllCells()
         setAppState('YOUWIN')
-        setAppSMILE('app__smile_cool')
       }
     }
   }, [minesCount])
@@ -112,12 +115,14 @@ function App() {
     const tmp = [...[...cells]]
     tmp[i][j].state = cell.state
     tmp[i][j].type = cell.type
+    tmp[i][j].minesaround = cell.minesaround
     setCells([...[...tmp]])
   }
 
   function checkNeighbours(i, j) {
     let minesCount = 0
 
+    // проверяем, если соседи по кругу сущкствуют и в них бомба, увеличиваем счетчик бомб
     if (i + 1 in cells && cells[i + 1][j].type === BOMB) minesCount++
     if (j + 1 in cells[i] && cells[i][j + 1].type === BOMB) minesCount++
     if (i + 1 in cells && j + 1 in cells[i + 1] && cells[i + 1][j + 1].type === BOMB) minesCount++
@@ -132,27 +137,37 @@ function App() {
     setCells([...[...tmp]])
   }
 
-  function handleMousePress(smile) {
-    setAppSMILE(smile)
-  }
-
-  function handleMouseLeave(smile) {
-    if (appState !== 'YOUWIN' || appState !== 'GAMEOVER') setAppSMILE(smile)
+  function handleSmileChange(smile) {
+    if (appState !== 'YOUWIN' && appState !== 'GAMEOVER') setAppSMILE(smile)
   }
 
   function handleClick(i, j, clickType) {
+    if (appState === 'GAMEOVER' || appState === 'YOUWIN') return
+
     if (clickType === 'rightClick') {
+      if (appState === 'IDLE') return
       if (cells[i][j].state === COVERED) {
         if (minesCount <= MINES_TOTAL) {
           setCell(i, j, { state: FLAG, type: cells[i][j].type, minesaround: cells[i][j].minesaround })
           setMinesCount((count) => count - 1)
         }
-      } else if (cells[i][j].state === FLAG) {
-        setMinesCount((count) => count + 1)
+        return
+      }
+
+      if (cells[i][j].state === FLAG) {
         setCell(i, j, { state: QUESTION, type: cells[i][j].type, minesaround: cells[i][j].minesaround })
-      } else if (cells[i][j].state === QUESTION)
+        setMinesCount((count) => count + 1)
+        return
+      }
+
+      if (cells[i][j].state === QUESTION) {
         setCell(i, j, { state: COVERED, type: cells[i][j].type, minesaround: cells[i][j].minesaround })
-    } else if (clickType === 'leftClick') {
+        return
+      }
+      return
+    }
+
+    if (clickType === 'leftClick') {
       if (appState === 'IDLE') {
         let mines = 0
         while (mines !== MINES_TOTAL) {
@@ -176,8 +191,6 @@ function App() {
       setCell(i, j, { state: UNCOVERED, type: EXPLOSION, minesaround: cells[i][j].minesaround })
       uncoverAllCells()
       setAppState('GAMEOVER')
-      setAppSMILE('app__smile_sad')
-
       return
     }
 
@@ -207,8 +220,8 @@ function App() {
         <Digits digits={timer} />
       </div>
       <div className="cellstable">
-        {cells.map((row, i) => {
-          return row.map((cell, j) => {
+        {cells.map((column, i) => {
+          return column.map((cell, j) => {
             return (
               <Cell
                 key={j}
@@ -217,8 +230,7 @@ function App() {
                 appState={appState}
                 cell={cell}
                 handleClick={handleClick}
-                handleMousePress={handleMousePress}
-                handleMouseLeave={handleMouseLeave}
+                handleSmileChange={handleSmileChange}
               />
             )
           })
